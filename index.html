@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UNIPRO — Learn. Build. Grow.</title>
+<style>
+:root {
+  --site-primary: #D9363E;
+  --site-on-primary: #FFFFFF;
+  --site-secondary: #34383F;
+  --site-on-secondary: #FFFFFF;
+  --site-accent: #23965A;
+  --site-accent-soft: #E4F4EA;
+  --site-background: #F3F4F6;
+  --site-on-background: #20242A;
+  --site-font-body: "Segoe UI", Tahoma, Arial, sans-serif;
+  --site-font-heading: "Segoe UI", Tahoma, Arial, sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); background: var(--site-background); color: var(--site-on-background); }
+#app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--site-on-background); border-radius: 0; overflow: hidden; }
+.shell { max-width: 1180px; margin: auto; padding: calc(24px * var(--site-spacing-scale)); }
+.topbar { background: var(--site-secondary); color: var(--site-on-secondary); }
+.topinner { display:flex; align-items:center; justify-content:space-between; gap:16px; max-width:1180px; margin:auto; padding: 16px 24px; }
+.brand { display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:1px; font-size:22px; direction:ltr; }
+.brandmark { width:36px; height:36px; display:grid; place-items:center; background:var(--site-primary); color:white; border-radius:11px; font-size:17px; }
+.nav { display:flex; gap:8px; flex-wrap:wrap; }
+.nav button, .langbtn { border:0; background:transparent; color:inherit; padding:9px 12px; border-radius:10px; cursor:pointer; font:inherit; }
+.nav button:hover, .nav button.active { background:rgba(255,255,255,.13); }
+.menu-toggle { display:none; border:1px solid rgba(255,255,255,.25); background:transparent; color:inherit; border-radius:10px; padding:9px 12px; cursor:pointer; font:inherit; }
+.nav.open { display:flex; }
+.langbtn { border:1px solid rgba(255,255,255,.25); }
+.hero { background: linear-gradient(125deg, #292D33 0%, #34383F 55%, #176B45 100%); color:white; position:relative; overflow:hidden; }
+.hero:after { content:""; position:absolute; width:320px; height:320px; border-radius:50%; background:var(--site-primary); opacity:calc(.16 * var(--site-decoration-opacity)); left:-80px; top:-130px; }
+.hero-grid { display:grid; grid-template-columns:1.25fr .75fr; gap:30px; align-items:center; position:relative; z-index:1; }
+.eyebrow { color:#9BE2B7; font-size:13px; font-weight:800; letter-spacing:1.5px; }
+h1 { font-family:var(--site-font-heading); font-size:calc(44px * var(--site-heading-scale)); line-height:1.17; margin:12px 0; }
+h2 { font-size:calc(26px * var(--site-heading-scale)); margin:0 0 8px; }
+h3 { margin:0; font-size:18px; }
+p { line-height:1.8; }
+.muted { color:#737983; }
+.hero p { color:#E1E3E7; max-width:600px; }
+.btn { border:0; border-radius:calc(12px * var(--site-radius-scale)); padding:12px 18px; cursor:pointer; font:inherit; font-weight:800; }
+.btn-primary { background:var(--site-primary); color:white; }
+.btn-light { background:white; color:#292D33; }
+.btn-outline { background:transparent; border:1px solid #D6D8DC; color:inherit; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+.hero-card { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.17); border-radius:20px; padding:22px; backdrop-filter:blur(8px); }
+.hero-stat { display:flex; justify-content:space-between; align-items:center; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.14); }
+.hero-stat:last-child { border:0; }
+.hero-stat strong { font-size:23px; }
+.section { padding:34px 0 12px; }
+.section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:18px; }
+.section-head p { margin:0; color:#737983; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.card { background:light-dark(#FFFFFF,#252A31); border:1px solid light-dark(#E3E5E8,#3B414A); border-radius:calc(17px * var(--site-radius-scale)); padding:20px; box-shadow:0 5px 18px rgba(0,0,0,.035); }
+.card-icon { width:44px; height:44px; display:grid; place-items:center; border-radius:13px; background:light-dark(#E4F4EA,#244333); color:var(--site-accent); font-size:21px; margin-bottom:14px; }
+.card p { color:light-dark(#737983,#B7BDC6); margin:8px 0 14px; font-size:14px; }
+.pill { display:inline-flex; border-radius:30px; background:light-dark(#E4F4EA,#244333); color:light-dark(#176B45,#9BE2B7); padding:5px 10px; font-size:12px; font-weight:800; }
+.catalog-tools { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+input, select { font:inherit; border:1px solid light-dark(#D9DDE2,#454B55); border-radius:11px; padding:11px 13px; background:light-dark(#FFFFFF,#20242A); color:var(--site-on-background); min-width:0; }
+input { flex:1; }
+.course-list { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.course { display:flex; flex-direction:column; gap:10px; }
+.course small { color:#8B919A; }
+.course .btn { margin-top:auto; align-self:flex-start; }
+.notice { background:light-dark(#FFF4E5,#3D3427); border:1px solid light-dark(#F2D7A8,#685332); color:light-dark(#67491A,#F5D99F); padding:14px 16px; border-radius:13px; font-size:14px; line-height:1.7; }
+.path { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; counter-reset:step; }
+.path-step { background:light-dark(#FFFFFF,#252A31); border:1px solid light-dark(#E3E5E8,#3B414A); padding:17px; border-radius:15px; }
+.path-step:before { counter-increment:step; content:counter(step); display:grid; place-items:center; width:29px; height:29px; border-radius:50%; background:var(--site-primary); color:white; font-weight:900; margin-bottom:12px; }
+footer { margin-top:42px; background:var(--site-secondary); color:#E6E8EB; }
+.footer-inner { max-width:1180px; margin:auto; padding:25px 24px; display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; padding:18px; z-index:5; }
+.modal { width:min(480px,100%); background:light-dark(#FFFFFF,#252A31); color:var(--site-on-background); border-radius:18px; padding:24px; }
+.modal.show, .modal-backdrop.show { display:flex; }
+.modal form { display:grid; gap:12px; }
+.close { float:left; border:0; background:transparent; color:inherit; font-size:24px; cursor:pointer; }
+.empty { display:none; color:#8B919A; padding:18px; text-align:center; border:1px dashed #9298A2; border-radius:12px; }
+@media (max-width:800px) { .hero-grid {grid-template-columns:1fr;} .grid,.course-list {grid-template-columns:repeat(2,1fr);} .path {grid-template-columns:repeat(2,1fr);} .topinner {flex-wrap:wrap;} .menu-toggle {display:block;} .nav {display:none; width:100%; flex-direction:column; align-items:stretch;} .nav button {text-align:right;} h1 {font-size:calc(35px * var(--site-heading-scale));} }
+@media (max-width:520px) { .shell {padding:18px;} .grid,.course-list,.path {grid-template-columns:1fr;} .section-head {align-items:start; flex-direction:column;} .topinner {padding:13px 18px;} }
+@media (prefers-color-scheme:dark) { .muted {color:#B7BDC6;} }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="topbar">
+    <div class="topinner">
+      <div class="brand"><span class="brandmark">U</span><span>UNIPRO</span></div>
+      <nav class="nav" id="mainNavigation" aria-label="Main navigation">
+        <button class="active" data-target="home" data-ar="الرئيسية" data-en="Home">الرئيسية</button>
+        <button data-target="university" data-ar="المواد الجامعية" data-en="University">المواد الجامعية</button>
+        <button data-target="skills" data-ar="المهارات" data-en="Skills">المهارات</button>
+        <button data-target="career" data-ar="المسار المهني" data-en="Career">المسار المهني</button>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNavigation" data-ar="القائمة" data-en="Menu">القائمة</button>
+      <button class="langbtn" id="language">EN</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="shell hero-grid">
+        <div>
+          <div class="eyebrow" data-ar="من الجامعة إلى سوق العمل" data-en="FROM CAMPUS TO CAREER">من الجامعة إلى سوق العمل</div>
+          <h1 data-ar="اتعلم. طوّر مهاراتك. ابنِ مستقبلك." data-en="Learn. Build your skills. Shape your future.">اتعلم. طوّر مهاراتك. ابنِ مستقبلك.</h1>
+          <p data-ar="منصة تعليمية لطلاب تجارة إنجليزي تجمع شرح المواد الجامعية والملخصات والاختبارات مع كورسات عملية تساعدك تستعد لسوق العمل." data-en="A learning platform for English Commerce students, bringing university lessons, summaries and quizzes together with practical career skills.">منصة تعليمية لطلاب تجارة إنجليزي تجمع شرح المواد الجامعية والملخصات والاختبارات مع كورسات عملية تساعدك تستعد لسوق العمل.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-scroll="university" data-ar="استكشف المواد" data-en="Explore subjects">استكشف المواد</button>
+            <button class="btn btn-light" data-scroll="skills" data-ar="ابدأ تطوير مهاراتك" data-en="Build your skills">ابدأ تطوير مهاراتك</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="pill">2026 / 2027</div>
+          <h3 style="margin-top:15px" data-ar="رحلتك التعليمية في مكان واحد" data-en="Your learning journey in one place">رحلتك التعليمية في مكان واحد</h3>
+          <div class="hero-stat"><span data-ar="مواد جامعية" data-en="University subjects">مواد جامعية</span><strong>01</strong></div>
+          <div class="hero-stat"><span data-ar="مهارات مهنية" data-en="Career skills">مهارات مهنية</span><strong>02</strong></div>
+          <div class="hero-stat"><span data-ar="اختبارات وتدريب" data-en="Quizzes & practice">اختبارات وتدريب</span><strong>03</strong></div>
+          <small style="color:#D9DCE1" data-ar="نسخة تجريبية — المحتوى الفعلي سيضاف بعد مراجعة جدول المواد." data-en="Prototype — real course content will be added after reviewing the official timetable.">نسخة تجريبية — المحتوى الفعلي سيضاف بعد مراجعة جدول المواد.</small>
+        </div>
+      </div>
+    </section>
+    <div class="shell">
+      <section class="section" id="university">
+        <div class="section-head"><div><span class="pill" data-ar="التعلم الجامعي" data-en="UNIVERSITY LEARNING">التعلم الجامعي</span><h2 data-ar="موادك في تجارة إنجليزي" data-en="Your Commerce subjects">موادك في تجارة إنجليزي</h2><p data-ar="شرح مبسط، ملخصات PDF، ومراجعات واختبارات لكل مادة." data-en="Clear lessons, PDF summaries, revision and quizzes for each subject.">شرح مبسط، ملخصات PDF، ومراجعات واختبارات لكل مادة.</p></div></div>
+        <div class="notice" data-ar="تم إدخال مواد الفصل الدراسي الأول للفرقة الأولى وفق الجدول المرفق. المواعيد والقاعات المعروضة تخص الجدول المنشور، وسيُضاف محتوى كل مادة بعد تجهيزه." data-en="First-semester subjects for Level 1 have been added from the supplied timetable. Displayed times and halls follow that schedule; learning content will be added as it is prepared.">تم إدخال مواد الفصل الدراسي الأول للفرقة الأولى وفق الجدول المرفق. المواعيد والقاعات المعروضة تخص الجدول المنشور، وسيُضاف محتوى كل مادة بعد تجهيزه.</div>
+        <div style="height:15px"></div>
+        <div class="catalog-tools"><input id="subjectSearch" placeholder="ابحث عن مادة..." aria-label="Search subjects"><select id="yearFilter"><option value="all">كل المواد — سنة أولى</option><option value="term1">الفصل الدراسي الأول</option><option value="term2">الفصل الدراسي الثاني</option></select></div>
+        <div class="course-list" id="subjectList">
+          <article class="card course" data-search="english 1 english اللغة الانجليزية" data-term="term1"><div class="card-icon">🔤</div><span class="pill" data-ar="السبت · 8–10" data-en="Saturday · 8–10 AM">السبت · 8–10</span><h3>English 1</h3><small data-ar="قاعة 2 — المبنى C" data-en="Hall 2 — Building C">قاعة 2 — المبنى C</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Content coming soon">المحتوى قيد التجهيز</button></article>
+          <article class="card course" data-search="principles financial accounting المحاسبة المالية" data-term="term1"><div class="card-icon">📒</div><span class="pill" data-ar="السبت · 10–12" data-en="Saturday · 10 AM–12 PM">السبت · 10–12</span><h3 data-ar="Principles of Financial Accounting" data-en="Principles of Financial Accounting">Principles of Financial Accounting</h3><small data-ar="قاعة 2 — المبنى C" data-en="Hall 2 — Building C">قاعة 2 — المبنى C</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Content coming soon">المحتوى قيد التجهيز</button></article>
+          <article class="card course" data-search="principles business administration ادارة الاعمال" data-term="term1"><div class="card-icon">💼</div><span class="pill" data-ar="الخميس · 8–10" data-en="Thursday · 8–10 AM">الخميس · 8–10</span><h3 data-ar="Principles of Business Administration" data-en="Principles of Business Administration">Principles of Business Administration</h3><small data-ar="قاعة 2 — المبنى C" data-en="Hall 2 — Building C">قاعة 2 — المبنى C</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Content coming soon">المحتوى قيد التجهيز</button></article>
+          <article class="card course" data-search="principles law القانون" data-term="term1"><div class="card-icon">⚖️</div><span class="pill" data-ar="الخميس · 10–12" data-en="Thursday · 10 AM–12 PM">الخميس · 10–12</span><h3 data-ar="Principles of Law" data-en="Principles of Law">Principles of Law</h3><small data-ar="قاعة 2 — المبنى C" data-en="Hall 2 — Building C">قاعة 2 — المبنى C</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Content coming soon">المحتوى قيد التجهيز</button></article>
+          <article class="card course" data-search="principles economics الاقتصاد" data-term="term1"><div class="card-icon">📈</div><span class="pill" data-ar="الخميس · 12–2" data-en="Thursday · 12–2 PM">الخميس · 12–2</span><h3 data-ar="Principles of Economics" data-en="Principles of Economics">Principles of Economics</h3><small data-ar="قاعة 2 — المبنى C" data-en="Hall 2 — Building C">قاعة 2 — المبنى C</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Content coming soon">المحتوى قيد التجهيز</button></article>
+          <article class="card course" data-search="exam quizzes exams بنك أسئلة" data-term="all"><div class="card-icon">✍️</div><span class="pill">قريبًا</span><h3 data-ar="بنك الأسئلة والامتحانات" data-en="Question bank & exams">بنك الأسئلة والامتحانات</h3><small data-ar="تدريبات واختبارات بعد تجهيز المواد" data-en="Practice quizzes after subjects are prepared">تدريبات واختبارات بعد تجهيز المواد</small><button class="btn btn-outline" disabled data-ar="المحتوى قيد التجهيز" data-en="Coming soon">المحتوى قيد التجهيز</button></article>
+        </div>
+        <div class="empty" id="subjectEmpty">لا توجد نتائج مطابقة.</div>
+      </section>
+      <section class="section" id="skills">
+        <div class="section-head"><div><span class="pill" data-ar="التطوير الشخصي" data-en="PERSONAL DEVELOPMENT">التطوير الشخصي</span><h2 data-ar="مهارات تفرق في الـCV" data-en="Skills that strengthen your CV">مهارات تفرق في الـCV</h2><p data-ar="ابدأ بالأساسيات وابنِ مهارات قابلة للتطبيق." data-en="Start with the fundamentals and build practical skills.">ابدأ بالأساسيات وابنِ مهارات قابلة للتطبيق.</p></div></div>
+        <div class="grid">
+          <article class="card"><div class="card-icon">▦</div><h3>Microsoft Excel</h3><p data-ar="من الأساسيات إلى الجداول والتحليل وإعداد التقارير." data-en="From fundamentals to spreadsheets, analysis and reporting.">من الأساسيات إلى الجداول والتحليل وإعداد التقارير.</p><span class="pill" data-ar="أولوية البداية" data-en="Start here">أولوية البداية</span></article>
+          <article class="card"><div class="card-icon">🌐</div><h3>Business English</h3><p data-ar="مصطلحات الأعمال، كتابة الإيميلات، والتواصل المهني." data-en="Business vocabulary, email writing and professional communication.">مصطلحات الأعمال، كتابة الإيميلات، والتواصل المهني.</p><span class="pill" data-ar="أولوية البداية" data-en="Start here">أولوية البداية</span></article>
+          <article class="card"><div class="card-icon">▤</div><h3>Accounting Basics</h3><p data-ar="تطبيقات عملية للمفاهيم المحاسبية الأساسية." data-en="Practical applications of core accounting concepts.">تطبيقات عملية للمفاهيم المحاسبية الأساسية.</p><span class="pill" data-ar="أولوية البداية" data-en="Start here">أولوية البداية</span></article>
+          <article class="card"><div class="card-icon">📊</div><h3>Power BI</h3><p data-ar="تصوير البيانات وبناء لوحات متابعة وتقارير." data-en="Data visualization, dashboards and reports.">تصوير البيانات وبناء لوحات متابعة وتقارير.</p><span class="pill" data-ar="مرحلة لاحقة" data-en="Later phase">مرحلة لاحقة</span></article>
+          <article class="card"><div class="card-icon">⌘</div><h3>Data Analysis</h3><p data-ar="مقدمة في تحليل البيانات وأدواته العملية." data-en="An introduction to data analysis and practical tools.">مقدمة في تحليل البيانات وأدواته العملية.</p><span class="pill" data-ar="مرحلة لاحقة" data-en="Later phase">مرحلة لاحقة</span></article>
+          <article class="card"><div class="card-icon">💻</div><h3>Programming Basics</h3><p data-ar="مدخل للبرمجة والتفكير المنطقي وحل المشكلات." data-en="An introduction to coding, logic and problem-solving.">مدخل للبرمجة والتفكير المنطقي وحل المشكلات.</p><span class="pill" data-ar="مرحلة لاحقة" data-en="Later phase">مرحلة لاحقة</span></article>
+        </div>
+      </section>
+      <section class="section" id="career">
+        <div class="section-head"><div><span class="pill" data-ar="مستقبلك المهني" data-en="YOUR CAREER">مستقبلك المهني</span><h2 data-ar="من طالب إلى مرشح جاهز للعمل" data-en="From student to job-ready candidate">من طالب إلى مرشح جاهز للعمل</h2><p data-ar="مسار عملي يساعدك تحول التعلم إلى دليل على مهاراتك." data-en="A practical path that turns learning into evidence of your skills.">مسار عملي يساعدك تحول التعلم إلى دليل على مهاراتك.</p></div></div>
+        <div class="path">
+          <div class="path-step"><h3 data-ar="تعلم المهارة" data-en="Learn a skill">تعلم المهارة</h3><p class="muted" data-ar="ابدأ بكورس مناسب لمستواك." data-en="Choose a course for your level.">ابدأ بكورس مناسب لمستواك.</p></div>
+          <div class="path-step"><h3 data-ar="نفّذ مشروعًا" data-en="Build a project">نفّذ مشروعًا</h3><p class="muted" data-ar="طبّق ما تعلمته في مشروع حقيقي." data-en="Apply what you learned in a practical project.">طبّق ما تعلمته في مشروع حقيقي.</p></div>
+          <div class="path-step"><h3 data-ar="جهّز ملفك" data-en="Prepare your profile">جهّز ملفك</h3><p class="muted" data-ar="اجمع مهاراتك ومشاريعك في CV وLinkedIn." data-en="Showcase skills and projects on your CV and LinkedIn.">اجمع مهاراتك ومشاريعك في CV وLinkedIn.</p></div>
+          <div class="path-step"><h3 data-ar="استعد للمقابلة" data-en="Prepare for interviews">استعد للمقابلة</h3><p class="muted" data-ar="تدرّب على الأسئلة والتواصل المهني." data-en="Practice interview questions and communication.">تدرّب على الأسئلة والتواصل المهني.</p></div>
+        </div>
+      </section>
+      <section class="section" id="join">
+        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--site-secondary);color:white;border:0">
+          <div><h2 data-ar="انضم إلى مجتمع UNIPRO" data-en="Join the UNIPRO community">انضم إلى مجتمع UNIPRO</h2><p style="color:#D6D9DE;margin-bottom:0" data-ar="سجل اهتمامك لتكون من أوائل الطلاب عند إطلاق النسخة التجريبية." data-en="Register your interest to be among the first students invited to the pilot.">سجل اهتمامك لتكون من أوائل الطلاب عند إطلاق النسخة التجريبية.</p></div>
+          <button class="btn btn-primary" id="joinBtn" data-ar="سجل اهتمامك" data-en="Register interest">سجل اهتمامك</button>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer><div class="footer-inner"><div class="brand"><span class="brandmark">U</span><span>UNIPRO</span></div><div data-ar="تعلم. طوّر مهاراتك. ابنِ مستقبلك." data-en="Learn. Build your skills. Shape your future.">تعلم. طوّر مهاراتك. ابنِ مستقبلك.</div><small>© 2026 UNIPRO — <span data-ar="نسخة تجريبية غير منشورة" data-en="Unpublished prototype">نسخة تجريبية غير منشورة</span></small></div></footer>
+</div>
+<div class="modal-backdrop" id="modalBackdrop"><div class="modal"><button class="close" id="closeModal" aria-label="Close">×</button><h2 data-ar="سجل اهتمامك" data-en="Register your interest">سجل اهتمامك</h2><p class="muted" data-ar="النموذج تجريبي حاليًا ولا يرسل البيانات إلى خادم." data-en="This is a demo form and does not send data to a server yet.">النموذج تجريبي حاليًا ولا يرسل البيانات إلى خادم.</p><form id="interestForm"><input required placeholder="الاسم / Name"><input required type="email" placeholder="البريد الإلكتروني / Email"><select required><option value="">السنة الدراسية / Academic year</option><option>First year / الفرقة الأولى</option><option>Other / أخرى</option></select><button class="btn btn-primary" type="submit" data-ar="تأكيد تجريبي" data-en="Demo submit">تأكيد تجريبي</button></form><p id="formMessage" class="muted" role="status"></p></div></div>
+<script>
+const $ = (s) => document.querySelector(s);
+let lang = 'ar';
+function setLanguage(next) {
+  lang = next;
+  document.documentElement.lang = next;
+  document.documentElement.dir = next === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('[data-ar][data-en]').forEach(el => { el.textContent = el.dataset[next]; });
+  $('#language').textContent = next === 'ar' ? 'EN' : 'عربي';
+  $('#subjectSearch').placeholder = next === 'ar' ? 'ابحث عن مادة...' : 'Search subjects...';
+  $('#yearFilter').options[0].text = next === 'ar' ? 'كل المواد — سنة أولى' : 'All subjects — First year';
+  $('#yearFilter').options[1].text = next === 'ar' ? 'الفصل الدراسي الأول' : 'First semester';
+  $('#yearFilter').options[2].text = next === 'ar' ? 'الفصل الدراسي الثاني' : 'Second semester';
+  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('active', b.dataset.target === 'home'));
+}
+$('#language').addEventListener('click', () => setLanguage(lang === 'ar' ? 'en' : 'ar'));
+$('#menuToggle').addEventListener('click', () => { const open = $('#mainNavigation').classList.toggle('open'); $('#menuToggle').setAttribute('aria-expanded', String(open)); });
+document.querySelectorAll('[data-scroll]').forEach(b => b.addEventListener('click', () => document.getElementById(b.dataset.scroll).scrollIntoView({behavior:'smooth'})));
+document.querySelectorAll('.nav button').forEach(b => b.addEventListener('click', () => {
+  document.getElementById(b.dataset.target).scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x === b));
+  $('#mainNavigation').classList.remove('open'); $('#menuToggle').setAttribute('aria-expanded', 'false');
+}));
+function filterSubjects() {
+  const q = $('#subjectSearch').value.trim().toLowerCase();
+  const term = $('#yearFilter').value;
+  let visible = 0;
+  document.querySelectorAll('#subjectList .course').forEach(card => {
+    const match = card.dataset.search.includes(q) && (term === 'all' || card.dataset.term === term || card.dataset.term === 'all');
+    card.style.display = match ? 'flex' : 'none'; if (match) visible++;
+  });
+  $('#subjectEmpty').style.display = visible ? 'none' : 'block';
+}
+$('#subjectSearch').addEventListener('input', filterSubjects);
+$('#yearFilter').addEventListener('change', filterSubjects);
+$('#joinBtn').addEventListener('click', () => $('#modalBackdrop').classList.add('show'));
+$('#closeModal').addEventListener('click', () => $('#modalBackdrop').classList.remove('show'));
+$('#modalBackdrop').addEventListener('click', e => { if (e.target === $('#modalBackdrop')) $('#modalBackdrop').classList.remove('show'); });
+$('#interestForm').addEventListener('submit', e => { e.preventDefault(); $('#formMessage').textContent = lang === 'ar' ? 'تم اختبار النموذج بنجاح. لن يتم حفظ البيانات في هذه النسخة.' : 'Demo form tested successfully. Data is not stored in this prototype.'; });
+</script>
+</body>
+</html>
